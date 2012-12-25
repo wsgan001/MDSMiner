@@ -14,9 +14,8 @@ import random
 def genData(etype,ts,nd,file):
   event_types = etype.split(',')  
   t = 0
-  t = random.randint(t+1,t+ts)
   of = open(file,'w')
-  i = 0
+  i = 1
   while i <= nd:
      t = random.randint(t+1,t+ts)
      of.write("%s,%d\n"%(random.choice(event_types),t))
