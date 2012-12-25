@@ -440,7 +440,7 @@ if __name__ == '__main__':
     skind           = 0
     
     
-    opts, _ = getopt.getopt(sys.argv[1:], "hi:o:w:t:k:s:")
+    opts, _ = getopt.getopt(sys.argv[1:], "hi:o:w:t:k:s:a:r:")
     for arg, v in opts:
         if arg == "-i":
             dataDir = v
