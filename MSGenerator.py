@@ -10,21 +10,32 @@ import string, os, sys
 #import functools
 import random
 
+def pick_by_pb(_list,pb):
+   x=random.uniform(0,1)
+   cumulative_pb = 0.0
+   for item, item_pb in zip(_list,pb):
+      cumulative_pb += float(item_pb)
+      if x < cumulative_pb : break
+   return item
+
 # data set generator 
-def genData(etype,ts,nd,file):
+def genData(etype,ts,nd,file,pbmods):
   event_types = etype.split(',')  
+  pbmode= pbmods.split(',')  
   t = 0
+  #t = random.randint(t+1,t+ts)
   of = open(file,'w')
   i = 1
   while i <= nd:
      t = random.randint(t+1,t+ts)
-     of.write("%s,%d\n"%(random.choice(event_types),t))
+     #of.write("%s,%d\n"%(random.choice(event_types),t))
+     of.write("%s,%d\n"%(pick_by_bp(event_types,pbmode),t))
      i += 1
   of.close()
 
 
 if __name__ == '__main__':
-# config parser
+  # config parser
   cf = ConfigParser.ConfigParser()    
   cf.read("gen.conf")    
   #s = cf.sections()
@@ -47,8 +58,10 @@ if __name__ == '__main__':
   if not os.path.exists(od):
      os.mkdir(od)
   etypes = []
+  pbmods = []
   for i in range(ns):
      etypes.insert(i,cf.get('local','etype%d'%(i+1)))
-     genData(etypes[i],ts,nd,"%s%s%s_%d"%(od,os.sep,pf,i+1)) 
+     pbmods.insert(i,cf.get('local','pbmod%d'%(i+1))) 
+     genData(etypes[i],ts,nd,"%s%s%s_%d"%(od,os.sep,pf,i+1),pbmods[i]) 
 
 
