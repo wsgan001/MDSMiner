@@ -171,9 +171,9 @@ class EpisodeSet:
         for key in epssupp.keys():
             #epsasupp[key] = epssupp[key] if epssupp[key] >= minsupp else maxmin*meansupp-minsupp 
             supp = epssupp[key]
-            #isupp = -math.log(supp,2) 
-            #epsasupp[key] = supp if supp >= minsupp else isupp*meansupp-supp
-            epsasupp[key] = supp if supp >= minsupp else n*meansupp-supp
+            isupp = -math.log(supp,2) 
+            epsasupp[key] = supp if supp >= minsupp else isupp*meansupp-supp
+            #epsasupp[key] = supp if supp >= minsupp else n*meansupp-supp
         return epsasupp
         
         
